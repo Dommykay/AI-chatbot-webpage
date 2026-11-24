@@ -350,7 +350,8 @@
 /* ============================================================
    Responsive: tablet keeps one pillar per side, phone drops the temple
    ============================================================ */
-@media (max-width: 1199px) {
+/* 1444px = 700px chat + two 372px colonnades (40 + 3×64 + 2×50 + 40); narrower squeezes the chat */
+@media (max-width: 1443px) {
   .pillar:not(:nth-child(2)) {
     display: none;
   }
