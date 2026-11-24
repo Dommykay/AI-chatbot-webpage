@@ -1,6 +1,7 @@
 import roofImg from '../assets/temple-roof.png';
 import bustImg from '../assets/alexander-bust.png';
 import './components.css';
+import './pillar.css';
 
 function Pillar() {
   return (

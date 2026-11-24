@@ -1,0 +1,16 @@
+/* Fluted pillar shaft: three repeating stripes (highlight, mid, shadow). */
+.pillar__shaft {
+  background: linear-gradient(
+    90deg,
+    #fbfaf7 0%, #fbfaf7 13%,
+    #e9e5db 13%, #e9e5db 25%,
+    #d3cdbf 25%, #d3cdbf 29%,
+    #fbfaf7 29%, #fbfaf7 42%,
+    #e9e5db 42%, #e9e5db 54%,
+    #d3cdbf 54%, #d3cdbf 58%,
+    #fbfaf7 58%, #fbfaf7 71%,
+    #e9e5db 71%, #e9e5db 83%,
+    #d3cdbf 83%, #d3cdbf 88%,
+    #fbfaf7 88%, #fbfaf7 100%
+  );
+}
