@@ -221,6 +221,7 @@
   border-radius: var(--radius);
   font: 500 16px/22.5px var(--font-body);
   overflow: hidden; /* hide the text while the bubble grows out of the typing dots */
+  flex-shrink: 0; /* overflow: hidden would otherwise let bubbles squash to fit instead of the list scrolling */
 }
 .chat-message p {
   margin: 0;
