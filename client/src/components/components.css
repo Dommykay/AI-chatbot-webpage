@@ -1,0 +1,351 @@
+/* ============================================================
+   Design tokens — change colours, fonts and sizes here.
+   ============================================================ */
+:root {
+  /* Colours */
+  --color-marble: #f3f1ec;        /* page background */
+  --color-card: #fbfaf7;          /* bot messages, inputs, suggestions */
+  --color-stone-light: #e9e5db;   /* top step */
+  --color-stone: #e4e0d6;         /* pillars, beam, middle step */
+  --color-stone-dark: #dbd6c9;    /* bottom step */
+  --color-stone-edge: #c9c3b4;    /* borders/shadows on stone and cards */
+  --color-blue: #1b3a9c;          /* user messages, send button, accents */
+  --color-blue-edge: #3a3f4c;
+  --color-ink: #16181f;           /* main text */
+  --color-muted: #5a5f6e;         /* placeholder, disclaimer, subtitle */
+
+  /* Fonts (loaded in index.html) */
+  --font-display: 'Marcellus', serif;
+  --font-body: 'Cormorant Garamond', serif;
+  --font-ui: 'Inter', sans-serif;
+
+  /* Sizes */
+  --radius: 10px;
+  --content-width: 700px;
+  --pillar-width: 64px;
+  --pillar-gap: 50px;
+}
+
+/* ============================================================
+   Layout: TempleLayout
+   ============================================================ */
+.temple {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-marble);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+.temple__pediment {
+  display: block;
+  width: 100%;
+  height: 142px;
+  object-fit: fill;
+}
+
+.temple__beam {
+  height: 26px;
+  background: var(--color-stone);
+  border-bottom: 3px solid var(--color-stone-edge);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.temple__frieze {
+  height: 32px;
+  border-bottom: 3px solid var(--color-stone-edge);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.temple__body {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.temple__content {
+  position: relative;
+  flex: 1;
+  max-width: var(--content-width);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Faded bust sits behind the page content */
+.temple__bust {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(352px, 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.temple__content > :not(.temple__bust) {
+  position: relative; /* stack above the bust */
+}
+
+.temple__step {
+  height: 16px;
+  border-top: 2px solid var(--color-stone-edge);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.temple__step--top { margin: 0 28px; background: var(--color-stone-light); }
+.temple__step--middle { margin: 0 14px; background: var(--color-stone); }
+.temple__step--bottom { background: var(--color-stone-dark); }
+
+/* Pillars */
+.colonnade {
+  display: flex;
+  gap: var(--pillar-gap);
+  padding: 0 40px;
+}
+
+.pillar {
+  width: var(--pillar-width);
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar__cap,
+.pillar__base {
+  height: 24px;
+  background: var(--color-stone);
+}
+.pillar__cap {
+  border-bottom: 2px solid var(--color-stone-edge);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.pillar__base {
+  border-top: 2px solid var(--color-stone-edge);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.pillar__shaft {
+  flex: 1;
+  margin: 0 8px;
+  background: var(--color-stone);
+}
+
+/* ============================================================
+   Shared: card look used by bot messages, input and suggestions
+   ============================================================ */
+.chat-message--bot,
+.message-input,
+.suggestion-button {
+  background: var(--color-card);
+  border: none;
+  border-bottom: 1px solid var(--color-stone-edge);
+  border-radius: var(--radius);
+}
+
+.disclaimer {
+  margin: 12px 0 0;
+  padding: 0 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.accent {
+  color: var(--color-blue);
+}
+
+/* ============================================================
+   BackButton
+   ============================================================ */
+.back-button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 19px;
+  padding: 5px;
+  background: none;
+  border: none;
+  font: 500 16px/18px var(--font-body);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.back-button img {
+  width: 11px;
+}
+
+/* ============================================================
+   ChatPage + ChatMessage
+   ============================================================ */
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 24px;
+}
+
+.chat__messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 50px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  max-width: min(450px, 85%);
+  padding: 10px;
+  border-radius: var(--radius);
+  font: 500 16px/22.5px var(--font-body);
+}
+.chat-message p {
+  margin: 0;
+}
+
+.chat-message--user {
+  align-self: flex-end;
+  background: var(--color-blue);
+  border-bottom: 1px solid var(--color-blue-edge);
+  color: #fff;
+}
+
+.chat-message--bot {
+  align-self: flex-start;
+  font-weight: 400;
+}
+
+.chat-message__author {
+  display: block;
+  font: 12px/18px var(--font-display);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   MessageInput
+   ============================================================ */
+.message-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 50px;
+  padding: 10px;
+}
+
+.message-input__field {
+  flex: 1;
+  min-width: 0;
+  padding: 0 10px;
+  background: none;
+  border: none;
+  outline: none;
+  font: italic 500 24px var(--font-body);
+  color: var(--color-ink);
+}
+.message-input__field::placeholder {
+  color: var(--color-muted);
+}
+
+.message-input__send {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  background: var(--color-blue);
+  border: none;
+  border-bottom: 1px solid var(--color-blue-edge);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.message-input__send img {
+  width: 30px;
+}
+
+/* ============================================================
+   WelcomePage + SuggestionButton
+   ============================================================ */
+.welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.welcome__eyebrow {
+  margin: 0;
+  font: 14px var(--font-display);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+}
+
+.welcome__title {
+  margin: 0;
+  font: 400 clamp(28px, 4vw, 40px) / 1.1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.welcome__subtitle {
+  margin: 0 0 24px;
+  font: italic 500 20px var(--font-body);
+  color: var(--color-muted);
+}
+
+.welcome__suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.suggestion-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 25px;
+  font: 500 16px/18px var(--font-body);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.suggestion-button:hover {
+  border-bottom-color: var(--color-blue);
+}
+
+.suggestion-button__number {
+  font: 15px var(--font-display);
+}
+
+/* ============================================================
+   Responsive: tablet keeps one pillar per side, phone drops the temple
+   ============================================================ */
+@media (max-width: 1199px) {
+  .pillar:not(:nth-child(2)) {
+    display: none;
+  }
+  .colonnade {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 699px) {
+  .temple__roof,
+  .temple__steps,
+  .colonnade {
+    display: none;
+  }
+  .chat__messages {
+    padding: 30px 10px;
+  }
+  .message-input {
+    margin: 0 10px;
+  }
+  .welcome {
+    padding: 40px 10px;
+  }
+}

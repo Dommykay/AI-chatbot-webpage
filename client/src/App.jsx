@@ -1,13 +1,12 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { ChatPage, WelcomePage } from './components';
 
-function App() {
-  return(
-    <h1>Alexander the Great says hello to the users!</h1>
-  )
+export default function App() {
+  const [messages, setMessages] = useState([]);
+
+  // shortcut: no backend yet, so questions are only echoed into the chat.
+  const ask = (text) => setMessages((prev) => [...prev, { from: 'user', text }]);
+
+  if (messages.length === 0) return <WelcomePage onAsk={ask} />;
+  return <ChatPage messages={messages} onSend={ask} onBack={() => setMessages([])} />;
 }
-
-export default App
