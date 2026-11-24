@@ -8,10 +8,13 @@ import './components.css';
 /**
  * Conversation screen.
  * messages: [{ from: 'user' | 'bot', text: string }]
- * isTyping: true while waiting for the bot; shows "…" and blocks sending.
+ * isTyping: true while waiting for the bot; shows the typing dots and blocks sending.
  */
 export default function ChatPage({ messages, isTyping, onSend, onBack }) {
   const listRef = useRef(null);
+  // The typing bubble sits in the same list at the index the reply will take, so React
+  // reuses that element for the reply and it can grow from the dots into the message.
+  const bubbles = isTyping ? [...messages, { from: 'bot', typing: true }] : messages;
 
   // Glide to the newest message whenever one is added or the typing bubble appears.
   useEffect(() => {
@@ -25,12 +28,11 @@ export default function ChatPage({ messages, isTyping, onSend, onBack }) {
         <BackButton onClick={onBack} />
 
         <div className="chat__messages" ref={listRef}>
-          {messages.map((message, i) => (
-            <ChatMessage key={i} from={message.from}>
+          {bubbles.map((message, i) => (
+            <ChatMessage key={i} from={message.from} typing={message.typing}>
               {message.text}
             </ChatMessage>
           ))}
-          {isTyping && <ChatMessage from="bot">…</ChatMessage>}
         </div>
 
         <MessageInput onSend={onSend} disabled={isTyping} />
