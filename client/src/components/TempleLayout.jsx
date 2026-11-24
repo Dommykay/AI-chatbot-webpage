@@ -1,4 +1,5 @@
 import roofImg from '../assets/temple-roof.png';
+import sunImg from '../assets/temple-sun.png';
 import bustImg from '../assets/alexander-bust.png';
 import './components.css';
 import './pillar.css';
@@ -30,6 +31,7 @@ export default function TempleLayout({ children }) {
     <div className="temple">
       <header className="temple__roof" aria-hidden="true">
         <img className="temple__pediment" src={roofImg} alt="" />
+        <img className="temple__sun" src={sunImg} alt="" />
         <div className="temple__beam" />
         <div className="temple__frieze" />
       </header>

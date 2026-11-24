@@ -40,11 +40,26 @@
   font-family: var(--font-body);
 }
 
+.temple__roof {
+  position: relative;
+}
+
+/* The triangle stretches with the screen; the sun is a separate image so it never does. */
 .temple__pediment {
   display: block;
   width: 100%;
   height: 142px;
   object-fit: fill;
+}
+
+/* Centred where the sun sat in the original artwork (85px down). Capping the width
+   at 8% of the roof keeps it inside the blue triangle as the triangle narrows. */
+.temple__sun {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  width: min(72px, 8%);
+  transform: translate(-50%, -50%);
 }
 
 .temple__beam {
