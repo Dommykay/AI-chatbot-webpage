@@ -1,0 +1,10 @@
+{
+  "start": {
+    "id": "start",
+    "messages": [
+      "Greetings, I am ALEXANDER, and i have conquered the known world",
+      "What part of my campaigns or empire do you wish to discuss?"
+    ],
+    "sources": ["src_1"]
+  }
+}
