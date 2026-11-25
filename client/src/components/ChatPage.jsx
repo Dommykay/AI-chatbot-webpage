@@ -10,7 +10,7 @@ import './components.css';
  * messages: [{ from: 'user' | 'bot', text: string }]
  * isTyping: true while waiting for the bot; shows the typing dots and blocks sending.
  */
-export default function ChatPage({ messages, isTyping, onSend, onBack }) {
+export default function ChatPage({ messages, isTyping, onSend, onBack, onSettings }) {
   const listRef = useRef(null);
   // The typing bubble sits in the same list at the index the reply will take, so React
   // reuses that element for the reply and it can grow from the dots into the message.
@@ -23,7 +23,7 @@ export default function ChatPage({ messages, isTyping, onSend, onBack }) {
   }, [messages.length, isTyping]);
 
   return (
-    <TempleLayout>
+    <TempleLayout onSettings={onSettings}>
       <section className="chat">
         <BackButton onClick={onBack} />
 

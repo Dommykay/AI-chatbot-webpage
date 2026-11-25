@@ -5,3 +5,6 @@ export { default as BackButton } from './BackButton.jsx';
 export { default as ChatMessage } from './ChatMessage.jsx';
 export { default as MessageInput } from './MessageInput.jsx';
 export { default as SuggestionButton } from './SuggestionButton.jsx';
+export { default as SettingsPage } from './SettingsPage.jsx';
+export { default as SettingsButton } from './SettingsButton.jsx';
+export { default as Switch } from './Switch.jsx';

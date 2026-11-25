@@ -10,9 +10,9 @@ const SUGGESTIONS = [
 ];
 
 /** Landing screen: title, message box and starter questions. Both inputs call onAsk(question). */
-export default function WelcomePage({ onAsk }) {
+export default function WelcomePage({ onAsk, onSettings }) {
   return (
-    <TempleLayout>
+    <TempleLayout onSettings={onSettings}>
       <section className="welcome">
         <p className="welcome__eyebrow">Alexander III of Macedon</p>
         <h1 className="welcome__title">

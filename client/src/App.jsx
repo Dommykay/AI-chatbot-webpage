@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { ChatPage, WelcomePage } from './components';
+import { ChatPage, SettingsPage, WelcomePage } from './components';
 import { getReply } from './chatApi.js';
 
 export default function App() {
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const openSettings = () => setShowSettings(true);
 
   async function ask(text) {
     if (isTyping) return; // one question at a time
@@ -19,8 +21,16 @@ export default function App() {
     }
   }
 
-  if (messages.length === 0) return <WelcomePage onAsk={ask} />;
+  // Messages live here, so leaving for settings and coming back keeps the chat.
+  if (showSettings) return <SettingsPage onBack={() => setShowSettings(false)} />;
+  if (messages.length === 0) return <WelcomePage onAsk={ask} onSettings={openSettings} />;
   return (
-    <ChatPage messages={messages} isTyping={isTyping} onSend={ask} onBack={() => !isTyping && setMessages([])} />
+    <ChatPage
+      messages={messages}
+      isTyping={isTyping}
+      onSend={ask}
+      onBack={() => !isTyping && setMessages([])}
+      onSettings={openSettings}
+    />
   );
 }

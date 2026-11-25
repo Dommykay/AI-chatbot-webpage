@@ -1,6 +1,7 @@
 import roofImg from '../assets/temple-roof.png';
 import sunImg from '../assets/temple-sun.png';
 import bustImg from '../assets/alexander-bust.png';
+import SettingsButton from './SettingsButton.jsx';
 import './components.css';
 import './pillar.css';
 
@@ -25,8 +26,11 @@ function Colonnade() {
   );
 }
 
-/** Page frame: temple roof, pillars either side, steps below, bust behind the content. */
-export default function TempleLayout({ children }) {
+/**
+ * Page frame: temple roof, pillars either side, steps below, bust behind the content.
+ * Pass onSettings to show the gear button in the top-right corner.
+ */
+export default function TempleLayout({ onSettings, children }) {
   return (
     <div className="temple">
       <header className="temple__roof" aria-hidden="true">
@@ -40,6 +44,7 @@ export default function TempleLayout({ children }) {
         <Colonnade />
         <main className="temple__content">
           <img className="temple__bust" src={bustImg} alt="" />
+          {onSettings && <SettingsButton onClick={onSettings} />}
           {children}
         </main>
         <Colonnade />
