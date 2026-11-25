@@ -159,6 +159,13 @@
   border-radius: var(--radius);
 }
 
+/* Thin stone-coloured scroll bars on the two areas that scroll */
+.temple__content,
+.chat__messages {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-stone-edge) transparent;
+}
+
 .disclaimer {
   margin: 12px 0 0;
   padding: 0 10px;
