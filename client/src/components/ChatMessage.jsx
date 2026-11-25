@@ -1,14 +1,14 @@
 import { useLayoutEffect, useRef } from 'react';
+import { reduceMotion } from './motion.js';
 import './components.css';
-
-const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /**
  * One chat bubble. `from` is "user" (blue, right) or "bot" (card, left, with author name).
  * `typing` shows three bouncing dots instead of text. When it flips to false on the same
  * element, the bubble grows from the dots' size to the message's size.
  */
-export default function ChatMessage({ from, author = 'Alexander', typing = false, children }) {
+// `still` skips the entry animation for a bubble that was already on screen before.
+export default function ChatMessage({ from, author = 'Alexander', typing = false, still = false, children }) {
   const ref = useRef(null);
   const lastSize = useRef(null);
 
@@ -47,7 +47,7 @@ export default function ChatMessage({ from, author = 'Alexander', typing = false
   }
 
   return (
-    <div ref={ref} className={`chat-message chat-message--${from}`}>
+    <div ref={ref} className={`chat-message chat-message--${from}${still ? ' chat-message--still' : ''}`}>
       {from === 'bot' && <span className="chat-message__author">{author}</span>}
       <p>{children}</p>
     </div>

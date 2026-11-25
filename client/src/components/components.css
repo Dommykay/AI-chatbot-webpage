@@ -159,6 +159,14 @@
   border-radius: var(--radius);
 }
 
+/* Reduce animations: App adds this class from the Settings switch (defaults to the device setting) */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
 /* Thin stone-coloured scroll bars on the two areas that scroll */
 .temple__content,
 .chat__messages {
@@ -239,6 +247,11 @@
 .chat-message--user {
   animation: fly-in 0.35s ease-out;
 }
+/* Already shown before (e.g. coming back from settings): no entry animation */
+.chat-message--still,
+.chat-message--still p {
+  animation: none;
+}
 
 /* Typing indicator: a small bubble with three bouncing dots */
 .chat-message--typing {
@@ -269,14 +282,6 @@
 }
 @keyframes fade-in {
   from { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .typing-dots span,
-  .chat-message--bot p,
-  .chat-message--user {
-    animation: none;
-  }
 }
 
 .chat-message--user {
@@ -506,13 +511,6 @@
 }
 .switch__track[aria-checked='true'] .switch__knob {
   transform: translateX(20px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .switch__track,
-  .switch__knob {
-    transition: none;
-  }
 }
 
 /* ============================================================
