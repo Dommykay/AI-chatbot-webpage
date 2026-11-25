@@ -229,10 +229,15 @@
 .chat-message--bot p {
   animation: fade-in 0.3s ease-out;
 }
+.chat-message--user {
+  animation: fly-in 0.35s ease-out;
+}
 
 /* Typing indicator: a small bubble with three bouncing dots */
 .chat-message--typing {
   padding: 12px 14px;
+  /* Stay invisible for a moment after sending, then fade in. Sending is locked from the start. */
+  animation: fade-in 0.2s ease-out 0.5s both;
 }
 .typing-dots {
   display: flex;
@@ -252,13 +257,17 @@
   0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
   30% { transform: translateY(-4px); opacity: 1; }
 }
+@keyframes fly-in {
+  from { transform: translateY(60px); opacity: 0; }
+}
 @keyframes fade-in {
   from { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .typing-dots span,
-  .chat-message--bot p {
+  .chat-message--bot p,
+  .chat-message--user {
     animation: none;
   }
 }

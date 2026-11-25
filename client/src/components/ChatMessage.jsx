@@ -23,8 +23,15 @@ export default function ChatMessage({ from, author = 'Alexander', typing = false
       { width: [before.width, after.width], height: [before.height, after.height] },
       { duration: 300, easing: 'ease-out' },
     );
-    // The list scrolled to the bottom before the bubble grew; follow it down.
-    grow.onfinish = () => el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    // Keep the growing bubble's bottom in view every frame so the scroll moves with the grow.
+    let frame;
+    const follow = () => {
+      el.scrollIntoView({ block: 'nearest' });
+      frame = requestAnimationFrame(follow);
+    };
+    follow();
+    grow.onfinish = grow.oncancel = () => cancelAnimationFrame(frame);
+    return () => cancelAnimationFrame(frame);
   }, [typing]);
 
   if (typing) {
